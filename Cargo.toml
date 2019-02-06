@@ -4,10 +4,8 @@ version = "0.1.0"
 authors = ["Arran France <arranf@gmail.com>"]
 edition = "2018"
 
-[profile.dev]
-panic = "abort"
-
-[profile.release]
-panic = "abort"
+[package.metadata.bootimage]
+default-target = "x86_64-ros.json"
 
 [dependencies]
+bootloader = "0.3.12"

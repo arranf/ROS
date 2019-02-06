@@ -3,10 +3,20 @@
 
 use core::panic::PanicInfo;
 
+static HELLO: &[u8] = b"Hello World!";
+
 // Entry point on Linux
 #[no_mangle] // Ensure the linker finds _start instead of a mangled name
 pub extern "C" fn _start() -> ! { //extern C defines the C calling convention
-    loop {} // Replace this later
+    let vga_buffer = 0xb8000 as *mut u8;
+    for (i, &byte) in HELLO.iter().enumerate() {
+        unsafe {
+            *vga_buffer.offset(i as isize * 2) = byte;
+            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
+        }
+    }
+
+    loop {}
 }
 
 // We need to define our own panic handler, Rust's panic handler is provided by std

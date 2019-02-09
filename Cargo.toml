@@ -7,6 +7,9 @@ edition = "2018"
 [package.metadata.bootimage]
 default-target = "x86_64-ros.json"
 
+[dev-dependencies]
+array-init = "0.0.3"
+
 [dependencies]
 bootloader = "0.3.12"
 volatile = "0.2.3"
